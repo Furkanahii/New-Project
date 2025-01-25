@@ -1,0 +1,1512 @@
+<!DOCTYPE html>
+<html lang="en-US">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Global Rights Watch</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary-color: #E63946;
+            --secondary-color: #1D3557;
+            --accent-color: #457B9D;
+            --light-color: #F1FAEE;
+            --dark-color: #2B2D42;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            line-height: 1.6;
+            color: var(--dark-color);
+        }
+
+        /* Navigation Styles */
+        .navbar {
+            background-color: rgba(29, 53, 87, 0.98) !important;
+            padding: 1rem 0;
+            transition: all 0.3s ease;
+        }
+
+        .navbar-brand {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: var(--light-color) !important;
+        }
+
+        .nav-link {
+            color: var(--light-color) !important;
+            font-weight: 500;
+            margin: 0 10px;
+            position: relative;
+        }
+
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background-color: var(--primary-color);
+            transition: width 0.3s ease;
+        }
+
+        .nav-link:hover::after {
+            width: 100%;
+        }
+
+        /* Emergency Banner */
+        .emergency-banner {
+            background-color: var(--primary-color);
+            color: white;
+            padding: 0.5rem 0;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .emergency-banner::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 200%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+            animation: shine 3s infinite;
+        }
+
+        @keyframes shine {
+            to {
+                left: 100%;
+            }
+        }
+
+        /* Hero Section */
+        .hero-section {
+            height: 100vh;
+            position: relative;
+            overflow: hidden;
+            background: linear-gradient(rgba(29, 53, 87, 0.8), rgba(29, 53, 87, 0.8)),
+                        url('https://source.unsplash.com/random/1920x1080/?human-rights') center/cover;
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 2;
+            color: white;
+            padding-top: 20vh;
+        }
+
+        .hero-title {
+            font-size: 4.5rem;
+            font-weight: 700;
+            margin-bottom: 2rem;
+            animation: fadeInUp 1s ease;
+        }
+
+        .hero-subtitle {
+            font-size: 1.8rem;
+            margin-bottom: 3rem;
+            animation: fadeInUp 1s ease 0.3s;
+            animation-fill-mode: both;
+        }
+
+        .hero-buttons {
+            animation: fadeInUp 1s ease 0.6s;
+            animation-fill-mode: both;
+        }
+
+        .btn-primary {
+            background-color: var(--primary-color);
+            border: none;
+            padding: 1rem 2rem;
+            font-weight: 600;
+            border-radius: 30px;
+            transition: transform 0.3s ease;
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(230, 57, 70, 0.3);
+        }
+
+        .btn-outline-light {
+            border: 2px solid white;
+            padding: 1rem 2rem;
+            font-weight: 600;
+            border-radius: 30px;
+            transition: all 0.3s ease;
+        }
+
+        .btn-outline-light:hover {
+            background-color: white;
+            color: var(--primary-color);
+        }
+
+        /* Statistics Strip */
+        .stats-strip {
+            background-color: var(--secondary-color);
+            color: white;
+            padding: 2rem 0;
+            margin-top: -5rem;
+            position: relative;
+            z-index: 3;
+            border-radius: 10px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+        }
+
+        .stat-item {
+            text-align: center;
+            padding: 1rem;
+        }
+
+        .stat-number {
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+            color: var(--primary-color);
+        }
+
+        .stat-label {
+            font-size: 1rem;
+            opacity: 0.9;
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .freedom-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: #000;
+            z-index: 9999;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: opacity 2s ease;
+        }
+
+        .overlay-content {
+            text-align: center;
+            color: white;
+        }
+
+        .fade-in {
+            opacity: 0;
+            animation: fadeIn 2s forwards 1s;
+        }
+
+        .fade-in-delay {
+            opacity: 0;
+            animation: fadeIn 2s forwards 2s;
+        }
+
+        .continue-btn {
+            padding: 12px 30px;
+            background: transparent;
+            border: 2px solid white;
+            color: white;
+            border-radius: 30px;
+            margin-top: 20px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            opacity: 0;
+            animation: fadeIn 2s forwards 3s;
+        }
+
+        .continue-btn:hover {
+            background: white;
+            color: black;
+        }
+
+        .chains {
+            margin-bottom: 2rem;
+        }
+
+        .chain-svg {
+            width: 200px;
+            height: 100px;
+        }
+
+        .chain-link {
+            fill: none;
+            stroke: white;
+            stroke-width: 4;
+            stroke-dasharray: 200;
+            stroke-dashoffset: 200;
+            animation: drawChain 2s forwards, breakChain 1s 2s forwards;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        @keyframes drawChain {
+            to {
+                stroke-dashoffset: 0;
+            }
+        }
+
+        @keyframes breakChain {
+            to {
+                stroke-dasharray: 20 180;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Add this right after <body> tag -->
+    <div class="freedom-overlay">
+        <div class="overlay-content">
+            <div class="chains">
+                <svg class="chain-svg" viewBox="0 0 100 100">
+                    <path class="chain-link" d="M30,50 A20,20 0 1,0 70,50 A20,20 0 1,0 30,50"/>
+                </svg>
+            </div>
+            <h2 class="fade-in">Freedom is a Human Right</h2>
+            <p class="fade-in-delay">Experience the journey from darkness to light</p>
+            <button class="continue-btn">Begin Journey</button>
+        </div>
+    </div>
+
+    <!-- Emergency Banner -->
+    <div class="emergency-banner">
+        <div class="container text-center">
+            <strong>URGENT:</strong> Emergency Response Needed in Crisis Regions - <a href="#" class="text-white text-decoration-underline">Take Action Now</a>
+        </div>
+    </div>
+
+    <!-- Navigation -->
+    <nav class="navbar navbar-expand-lg navbar-dark fixed-top">
+        <div class="container">
+            <a class="navbar-brand" href="#">Global Rights Watch</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item"><a class="nav-link" href="#about">About</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#campaigns">Campaigns</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#take-action">Take Action</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#news">News</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#research">Research</a></li>
+                    <li class="nav-item"><a class="btn btn-primary ms-3" href="#donate">Donate</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero-section">
+        <div class="container hero-content text-center">
+            <h1 class="hero-title">Defending Human Rights Worldwide</h1>
+            <p class="hero-subtitle">Join us in the fight for justice, equality, and human dignity</p>
+            <div class="hero-buttons">
+                <a href="#take-action" class="btn btn-primary me-3">Take Action Now</a>
+                <a href="#learn-more" class="btn btn-outline-light">Learn More</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Statistics Strip -->
+    <div class="container">
+        <div class="stats-strip">
+            <div class="row">
+                <div class="col-md-3 stat-item">
+                    <div class="stat-number" data-target="150">0</div>
+                    <div class="stat-label">Countries Active</div>
+                </div>
+                <div class="col-md-3 stat-item">
+                    <div class="stat-number" data-target="2500000">0</div>
+                    <div class="stat-label">Supporters Worldwide</div>
+                </div>
+                <div class="col-md-3 stat-item">
+                    <div class="stat-number" data-target="500">0</div>
+                    <div class="stat-label">Active Campaigns</div>
+                </div>
+                <div class="col-md-3 stat-item">
+                    <div class="stat-number" data-target="10000">0</div>
+                    <div class="stat-label">Lives Impacted</div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- ... previous code ... -->
+
+<!-- Current Issues & Campaigns -->
+<section class="current-issues py-5">
+    <div class="container">
+        <div class="section-header text-center mb-5">
+            <h6 class="text-primary text-uppercase fw-bold">Priority Campaigns</h6>
+            <h2 class="display-4 fw-bold">Current Critical Issues</h2>
+            <div class="header-line"></div>
+        </div>
+
+        <div class="issues-grid">
+            <div class="row g-4">
+                <div class="col-md-4">
+                    <div class="issue-card">
+                        <div class="issue-image">
+                            <img src="https://source.unsplash.com/random/600x400/?protest" alt="Climate Justice" class="img-fluid">
+                            <div class="urgency-badge">Urgent</div>
+                        </div>
+                        <div class="issue-content">
+                            <h3>Climate Justice</h3>
+                            <p>Fighting for environmental rights and supporting communities affected by climate change.</p>
+                            <div class="progress mb-3" style="height: 5px;">
+                                <div class="progress-bar bg-success" style="width: 75%"></div>
+                            </div>
+                            <div class="d-flex justify-content-between mb-3">
+                                <span>75% of goal reached</span>
+                                <span>15,000 supporters</span>
+                            </div>
+                            <a href="#" class="btn btn-outline-primary w-100">Join Campaign</a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-4">
+                    <div class="issue-card">
+                        <div class="issue-image">
+                            <img src="https://source.unsplash.com/random/600x400/?education" alt="Education Rights" class="img-fluid">
+                            <div class="urgency-badge">Ongoing</div>
+                        </div>
+                        <div class="issue-content">
+                            <h3>Education Rights</h3>
+                            <p>Ensuring access to quality education for children in conflict zones and rural areas.</p>
+                            <div class="progress mb-3" style="height: 5px;">
+                                <div class="progress-bar bg-success" style="width: 60%"></div>
+                            </div>
+                            <div class="d-flex justify-content-between mb-3">
+                                <span>60% of goal reached</span>
+                                <span>12,000 supporters</span>
+                            </div>
+                            <a href="#" class="btn btn-outline-primary w-100">Join Campaign</a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-4">
+                    <div class="issue-card">
+                        <div class="issue-image">
+                            <img src="https://source.unsplash.com/random/600x400/?freedom" alt="Freedom of Expression" class="img-fluid">
+                            <div class="urgency-badge urgent">Critical</div>
+                        </div>
+                        <div class="issue-content">
+                            <h3>Freedom of Expression</h3>
+                            <p>Protecting journalists and activists fighting for truth and transparency.</p>
+                            <div class="progress mb-3" style="height: 5px;">
+                                <div class="progress-bar bg-danger" style="width: 85%"></div>
+                            </div>
+                            <div class="d-flex justify-content-between mb-3">
+                                <span>85% of goal reached</span>
+                                <span>20,000 supporters</span>
+                            </div>
+                            <a href="#" class="btn btn-outline-primary w-100">Join Campaign</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Enhanced World Map Section -->
+<section class="world-map-section bg-light py-5">
+    <div class="container">
+        <div class="section-header text-center mb-5">
+            <h6 class="text-primary text-uppercase fw-bold">Global Presence</h6>
+            <h2 class="display-4 fw-bold">Where Rights Need Protection</h2>
+            <div class="header-line"></div>
+        </div>
+
+        <div class="map-container position-relative">
+            <div id="world-map"></div>
+            <div class="crisis-points">
+                <!-- Example crisis points -->
+                <div class="crisis-point" style="top: 40%; left: 45%;" data-region="Central Africa">
+                    <div class="pulse"></div>
+                    <div class="crisis-info">
+                        <div class="crisis-card">
+                            <img src="https://source.unsplash.com/random/300x200/?protest" alt="Crisis Region">
+                            <h4>Central Africa Crisis</h4>
+                            <p>Ongoing humanitarian crisis affecting 2.5M people</p>
+                            <ul class="crisis-stats">
+                                <li><i class="fas fa-user-shield"></i> 500K displaced</li>
+                                <li><i class="fas fa-medkit"></i> Medical aid needed</li>
+                                <li><i class="fas fa-hand-holding-heart"></i> Emergency response active</li>
+                            </ul>
+                            <a href="#" class="btn btn-primary btn-sm">Take Action</a>
+                        </div>
+                    </div>
+                </div>
+                <!-- Add more crisis points with similar structure -->
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Updated News Section with Freedom Focus -->
+<section class="news-section py-5">
+    <div class="container">
+        <div class="section-header text-center mb-5">
+            <h6 class="text-primary text-uppercase fw-bold">Freedom Watch</h6>
+            <h2 class="display-4 fw-bold">Voices of the Silenced</h2>
+            <div class="header-line"></div>
+        </div>
+
+        <div class="freedom-stories">
+            <div class="row g-4">
+                <div class="col-lg-6">
+                    <div class="story-card animated-card">
+                        <div class="story-image">
+                            <div class="illustration-overlay">
+                                <!-- SVG illustration representing censorship -->
+                                <svg class="censorship-illustration" viewBox="0 0 100 100">
+                                    <!-- Add SVG paths for illustration -->
+                                </svg>
+                            </div>
+                            <img src="https://source.unsplash.com/random/600x400/?protest" alt="Freedom of Speech">
+                        </div>
+                        <div class="story-content">
+                            <span class="story-tag">Press Freedom</span>
+                            <h3>Journalists Under Fire: The Cost of Truth</h3>
+                            <p>Investigation into the increasing threats faced by journalists worldwide...</p>
+                            <div class="story-stats">
+                                <span><i class="fas fa-newspaper"></i> 152 cases in 2024</span>
+                                <span><i class="fas fa-globe"></i> 45 countries</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- Add more similar story cards -->
+            </div>
+        </div>
+    </div>
+</section>
+
+<style>
+/* Current Issues Styles */
+.issue-card {
+    background: white;
+    border-radius: 15px;
+    overflow: hidden;
+    box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+    transition: transform 0.3s ease;
+}
+
+.issue-card:hover {
+    transform: translateY(-5px);
+}
+
+.issue-image {
+    position: relative;
+    height: 200px;
+    overflow: hidden;
+}
+
+.issue-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.3s ease;
+}
+
+.issue-card:hover .issue-image img {
+    transform: scale(1.1);
+}
+
+.urgency-badge {
+    position: absolute;
+    top: 15px;
+    right: 15px;
+    padding: 5px 15px;
+    border-radius: 20px;
+    background: var(--primary-color);
+    color: white;
+    font-size: 0.8rem;
+    font-weight: 600;
+}
+
+.issue-content {
+    padding: 1.5rem;
+}
+
+/* World Map Styles */
+.map-container {
+    height: 600px;
+    background: #1a2634;
+    border-radius: 15px;
+    overflow: hidden;
+    position: relative;
+}
+
+#world-map {
+    height: 100%;
+    filter: brightness(0.8) saturate(1.2);
+}
+
+.crisis-point {
+    position: absolute;
+    z-index: 2;
+}
+
+.crisis-card {
+    position: absolute;
+    width: 300px;
+    background: white;
+    border-radius: 10px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+    opacity: 0;
+    transform: translateY(20px);
+    transition: all 0.3s ease;
+    pointer-events: none;
+}
+
+.crisis-point:hover .crisis-card {
+    opacity: 1;
+    transform: translateY(0);
+    pointer-events: all;
+}
+
+.pulse {
+    width: 20px;
+    height: 20px;
+    background: var(--primary-color);
+    border-radius: 50%;
+    position: relative;
+    cursor: pointer;
+}
+
+.pulse::after {
+    content: '';
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background: var(--primary-color);
+    border-radius: 50%;
+    animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+    0% {
+        transform: scale(1);
+        opacity: 1;
+    }
+    100% {
+        transform: scale(3);
+        opacity: 0;
+    }
+}
+
+/* News Section Styles */
+.news-section .card {
+    transition: transform 0.3s ease;
+}
+
+.news-section .card:hover {
+    transform: translateY(-5px);
+}
+
+.header-line {
+    width: 50px;
+    height: 3px;
+    background: var(--primary-color);
+    margin: 1rem auto;
+}
+
+.meta-info span {
+    font-size: 0.9rem;
+    color: #666;
+}
+
+.news-list li {
+    padding: 10px 0;
+    border-bottom: 1px solid #eee;
+}
+
+.news-list li:last-child {
+    border-bottom: none;
+}
+
+/* Freedom Stories Styles */
+.animated-card {
+    position: relative;
+    overflow: hidden;
+    transform: translateY(50px);
+    opacity: 0;
+    animation: fadeInUp 0.6s forwards;
+}
+
+.illustration-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0,0,0,0.4);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.story-tag {
+    background: var(--primary-color);
+    color: white;
+    padding: 4px 12px;
+    border-radius: 20px;
+    font-size: 0.8rem;
+    margin-bottom: 1rem;
+    display: inline-block;
+}
+
+/* Additional Animations */
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(50px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+</style>
+<!-- Take Action Section -->
+<section class="take-action-section py-5">
+    <div class="container">
+        <div class="section-header text-center mb-5">
+            <h6 class="text-primary text-uppercase fw-bold">Make A Difference</h6>
+            <h2 class="display-4 fw-bold">Take Action Now</h2>
+            <div class="header-line"></div>
+        </div>
+
+        <div class="action-cards">
+            <div class="row g-4">
+                <div class="col-md-6 col-lg-3">
+                    <div class="action-card">
+                        <div class="action-icon">
+                            <i class="fas fa-pen-nib"></i>
+                        </div>
+                        <h4>Sign Petitions</h4>
+                        <p>Add your voice to crucial campaigns</p>
+                        <div class="action-progress">
+                            <div class="progress-ring">
+                                <span class="progress-number">85%</span>
+                            </div>
+                            <p class="signatures">15,234 signatures</p>
+                        </div>
+                        <a href="#" class="btn btn-outline-primary btn-block">Sign Now</a>
+                    </div>
+                </div>
+
+                <div class="col-md-6 col-lg-3">
+                    <div class="action-card">
+                        <div class="action-icon">
+                            <i class="fas fa-hand-holding-heart"></i>
+                        </div>
+                        <h4>Donate</h4>
+                        <p>Support our global initiatives</p>
+                        <div class="donation-progress">
+                            <div class="progress mb-2">
+                                <div class="progress-bar" style="width: 70%"></div>
+                            </div>
+                            <p class="text-center">$75,000 of $100,000 goal</p>
+                        </div>
+                        <a href="#" class="btn btn-primary btn-block">Donate Now</a>
+                    </div>
+                </div>
+
+                <div class="col-md-6 col-lg-3">
+                    <div class="action-card">
+                        <div class="action-icon">
+                            <i class="fas fa-users"></i>
+                        </div>
+                        <h4>Volunteer</h4>
+                        <p>Join our global network</p>
+                        <div class="volunteer-info">
+                            <span class="badge bg-success">120 Opportunities</span>
+                            <p>In 45 countries</p>
+                        </div>
+                        <a href="#" class="btn btn-outline-primary btn-block">Join Us</a>
+                    </div>
+                </div>
+
+                <div class="col-md-6 col-lg-3">
+                    <div class="action-card urgent">
+                        <div class="action-icon">
+                            <i class="fas fa-exclamation-triangle"></i>
+                        </div>
+                        <h4>Urgent Actions</h4>
+                        <p>Respond to critical situations</p>
+                        <div class="urgent-cases">
+                            <span class="badge bg-danger">5 Critical Cases</span>
+                            <p>Immediate response needed</p>
+                        </div>
+                        <a href="#" class="btn btn-danger btn-block">Act Now</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Research & Resources -->
+<section class="research-section bg-light py-5">
+    <div class="container">
+        <div class="section-header text-center mb-5">
+            <h6 class="text-primary text-uppercase fw-bold">Knowledge Center</h6>
+            <h2 class="display-4 fw-bold">Research & Resources</h2>
+            <div class="header-line"></div>
+        </div>
+
+        <div class="research-grid">
+            <div class="row g-4">
+                <div class="col-md-6">
+                    <div class="research-card featured">
+                        <div class="research-content">
+                            <div class="research-tag">Featured Report</div>
+                            <h3>State of Human Rights 2024</h3>
+                            <p>Comprehensive analysis of global human rights trends and developments.</p>
+                            <div class="research-meta">
+                                <span><i class="fas fa-file-pdf"></i> PDF Report</span>
+                                <span><i class="fas fa-download"></i> 15k Downloads</span>
+                            </div>
+                            <a href="#" class="btn btn-primary mt-3">Download Report</a>
+                        </div>
+                        <div class="research-image">
+                            <img src="https://source.unsplash.com/random/600x400/?document" alt="Research Report">
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-6">
+                    <div class="row g-4">
+                        <div class="col-12">
+                            <div class="resource-card">
+                                <i class="fas fa-book resource-icon"></i>
+                                <div class="resource-content">
+                                    <h4>Educational Resources</h4>
+                                    <p>Teaching materials and guides for human rights education</p>
+                                    <a href="#" class="btn btn-sm btn-outline-primary">Browse Resources</a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-12">
+                            <div class="resource-card">
+                                <i class="fas fa-video resource-icon"></i>
+                                <div class="resource-content">
+                                    <h4>Multimedia Library</h4>
+                                    <p>Videos, podcasts, and interactive content</p>
+                                    <a href="#" class="btn btn-sm btn-outline-primary">Explore Media</a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-12">
+                            <div class="resource-card">
+                                <i class="fas fa-chart-bar resource-icon"></i>
+                                <div class="resource-content">
+                                    <h4>Data & Statistics</h4>
+                                    <p>Human rights data visualization and analysis</p>
+                                    <a href="#" class="btn btn-sm btn-outline-primary">View Data</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Impact Stories -->
+<section class="impact-stories-section py-5">
+    <div class="container">
+        <div class="section-header text-center mb-5">
+            <h6 class="text-primary text-uppercase fw-bold">Real Impact</h6>
+            <h2 class="display-4 fw-bold">Stories of Change</h2>
+            <div class="header-line"></div>
+        </div>
+
+        <div class="impact-slider">
+            <div class="row">
+                <div class="col-md-6 col-lg-4">
+                    <div class="story-card">
+                        <div class="story-image">
+                            <img src="https://source.unsplash.com/random/400x300/?people" alt="Impact Story">
+                            <div class="story-category">Education</div>
+                        </div>
+                        <div class="story-content">
+                            <h4>Sarah's Journey to Education</h4>
+                            <p>"Thanks to the support, I can now pursue my dreams of becoming a teacher."</p>
+                            <div class="story-meta">
+                                <span><i class="fas fa-map-marker-alt"></i> Kenya</span>
+                                <span><i class="fas fa-calendar"></i> 2024</span>
+                            </div>
+                            <a href="#" class="btn btn-link">Read Full Story <i class="fas fa-arrow-right"></i></a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-6 col-lg-4">
+                    <div class="story-card">
+                        <div class="story-image">
+                            <img src="https://source.unsplash.com/random/400x300/?community" alt="Impact Story">
+                            <div class="story-category">Community</div>
+                        </div>
+                        <div class="story-content">
+                            <h4>Building Resilient Communities</h4>
+                            <p>"Our village now has access to clean water and healthcare facilities."</p>
+                            <div class="story-meta">
+                                <span><i class="fas fa-map-marker-alt"></i> Bangladesh</span>
+                                <span><i class="fas fa-calendar"></i> 2024</span>
+                            </div>
+                            <a href="#" class="btn btn-link">Read Full Story <i class="fas fa-arrow-right"></i></a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-6 col-lg-4">
+                    <div class="story-card">
+                        <div class="story-image">
+                            <img src="https://source.unsplash.com/random/400x300/?justice" alt="Impact Story">
+                            <div class="story-category">Justice</div>
+                        </div>
+                        <div class="story-content">
+                            <h4>Justice Prevails</h4>
+                            <p>"After 5 years of advocacy, we finally achieved legal recognition."</p>
+                            <div class="story-meta">
+                                <span><i class="fas fa-map-marker-alt"></i> Brazil</span>
+                                <span><i class="fas fa-calendar"></i> 2024</span>
+                            </div>
+                            <a href="#" class="btn btn-link">Read Full Story <i class="fas fa-arrow-right"></i></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<style>
+/* Take Action Section Styles */
+.action-card {
+    background: white;
+    padding: 2rem;
+    border-radius: 15px;
+    text-align: center;
+    box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+    transition: transform 0.3s ease;
+}
+
+.action-card:hover {
+    transform: translateY(-10px);
+}
+
+.action-icon {
+    width: 70px;
+    height: 70px;
+    margin: 0 auto 1.5rem;
+    background: var(--primary-color);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.action-icon i {
+    font-size: 2rem;
+    color: white;
+}
+
+.progress-ring {
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    border: 8px solid #eee;
+    border-top-color: var(--primary-color);
+    margin: 1rem auto;
+    position: relative;
+}
+
+.progress-number {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 1.2rem;
+    font-weight: bold;
+}
+
+/* Research Section Styles */
+.research-card {
+    background: white;
+    border-radius: 15px;
+    overflow: hidden;
+    display: flex;
+    box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+}
+
+.research-content {
+    padding: 2rem;
+    flex: 1;
+}
+
+.research-image {
+    flex: 1;
+    min-height: 300px;
+}
+
+.research-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.resource-card {
+    background: white;
+    padding: 1.5rem;
+    border-radius: 15px;
+    display: flex;
+    align-items: center;
+    gap: 1.5rem;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+    transition: transform 0.3s ease;
+}
+
+.resource-card:hover {
+    transform: translateX(10px);
+}
+
+.resource-icon {
+    font-size: 2rem;
+    color: var(--primary-color);
+}
+
+/* Impact Stories Styles */
+.story-card {
+    background: white;
+    border-radius: 15px;
+    overflow: hidden;
+    box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+    margin-bottom: 2rem;
+}
+
+.story-image {
+    position: relative;
+    height: 200px;
+}
+
+.story-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.story-category {
+    position: absolute;
+    top: 1rem;
+    right: 1rem;
+    background: var(--primary-color);
+    color: white;
+    padding: 0.5rem 1rem;
+    border-radius: 20px;
+    font-size: 0.8rem;
+}
+
+.story-content {
+    padding: 1.5rem;
+}
+
+.story-meta {
+    display: flex;
+    gap: 1rem;
+    margin: 1rem 0;
+    font-size: 0.9rem;
+    color: #666;
+}
+</style>
+<!-- Get Involved Section -->
+<section class="get-involved-section py-5">
+    <div class="container">
+        <div class="section-header text-center mb-5">
+            <h6 class="text-primary text-uppercase fw-bold">Join Our Movement</h6>
+            <h2 class="display-4 fw-bold">Get Involved</h2>
+            <div class="header-line"></div>
+        </div>
+
+        <div class="involvement-options">
+            <div class="row g-4">
+                <div class="col-lg-6">
+                    <div class="involvement-card primary-card">
+                        <div class="card-content">
+                            <h3>Become a Monthly Donor</h3>
+                            <p>Support our ongoing missions with a monthly contribution</p>
+                            <div class="donation-tiers">
+                                <button class="tier-btn" data-amount="10">$10/mo</button>
+                                <button class="tier-btn active" data-amount="25">$25/mo</button>
+                                <button class="tier-btn" data-amount="50">$50/mo</button>
+                                <button class="tier-btn" data-amount="100">$100/mo</button>
+                                <input type="number" class="custom-amount" placeholder="Custom amount">
+                            </div>
+                            <button class="btn btn-primary btn-lg mt-3">Become a Donor</button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-lg-6">
+                    <div class="involvement-card secondary-card">
+                        <div class="card-content">
+                            <h3>Join Our Network</h3>
+                            <p>Connect with like-minded advocates and make a difference</p>
+                            <div class="network-options">
+                                <div class="option">
+                                    <i class="fas fa-user-friends"></i>
+                                    <h4>Volunteer</h4>
+                                    <p>Join local initiatives</p>
+                                </div>
+                                <div class="option">
+                                    <i class="fas fa-bullhorn"></i>
+                                    <h4>Advocate</h4>
+                                    <p>Spread awareness</p>
+                                </div>
+                                <div class="option">
+                                    <i class="fas fa-hands-helping"></i>
+                                    <h4>Partner</h4>
+                                    <p>Organizational collaboration</p>
+                                </div>
+                            </div>
+                            <button class="btn btn-outline-primary btn-lg mt-3">Join Network</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="impact-calculator mt-5">
+                <div class="calculator-header text-center mb-4">
+                    <h3>Calculate Your Impact</h3>
+                    <p>See how your support can make a difference</p>
+                </div>
+                <div class="calculator-body">
+                    <div class="row align-items-center">
+                        <div class="col-md-6">
+                            <div class="impact-slider">
+                                <label>Monthly Contribution</label>
+                                <input type="range" min="10" max="500" value="25" class="impact-range">
+                                <div class="range-values">
+                                    <span>$10</span>
+                                    <span>$500</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="impact-results">
+                                <div class="result-item">
+                                    <i class="fas fa-book"></i>
+                                    <span class="result-number">25</span>
+                                    <span class="result-label">Children Educated</span>
+                                </div>
+                                <div class="result-item">
+                                    <i class="fas fa-medkit"></i>
+                                    <span class="result-number">10</span>
+                                    <span class="result-label">Medical Supplies</span>
+                                </div>
+                                <div class="result-item">
+                                    <i class="fas fa-home"></i>
+                                    <span class="result-number">5</span>
+                                    <span class="result-label">Families Sheltered</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Footer -->
+<footer class="footer-section">
+    <div class="footer-top py-5">
+        <div class="container">
+            <div class="row g-4">
+                <div class="col-lg-4">
+                    <div class="footer-about">
+                        <h3>Global Rights Watch</h3>
+                        <p>Defending human rights and promoting justice worldwide through advocacy, research, and action.</p>
+                        <div class="social-links">
+                            <a href="#"><i class="fab fa-facebook"></i></a>
+                            <a href="#"><i class="fab fa-twitter"></i></a>
+                            <a href="#"><i class="fab fa-instagram"></i></a>
+                            <a href="#"><i class="fab fa-linkedin"></i></a>
+                            <a href="#"><i class="fab fa-youtube"></i></a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-2">
+                    <h4>Quick Links</h4>
+                    <ul class="footer-links">
+                        <li><a href="#">About Us</a></li>
+                        <li><a href="#">Our Work</a></li>
+                        <li><a href="#">Take Action</a></li>
+                        <li><a href="#">News & Stories</a></li>
+                        <li><a href="#">Contact Us</a></li>
+                    </ul>
+                </div>
+                <div class="col-lg-2">
+                    <h4>Resources</h4>
+                    <ul class="footer-links">
+                        <li><a href="#">Annual Reports</a></li>
+                        <li><a href="#">Research Papers</a></li>
+                        <li><a href="#">Media Center</a></li>
+                        <li><a href="#">Publications</a></li>
+                        <li><a href="#">FAQs</a></li>
+                    </ul>
+                </div>
+                <div class="col-lg-4">
+                    <div class="newsletter-signup">
+                        <h4>Stay Informed</h4>
+                        <p>Subscribe to our newsletter for updates and news.</p>
+                        <form class="newsletter-form">
+                            <div class="input-group">
+                                <input type="email" class="form-control" placeholder="Your email address">
+                                <button class="btn btn-primary">Subscribe</button>
+                            </div>
+                        </form>
+                        <div class="mt-3">
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" id="newsletter-consent">
+                                <label class="form-check-label" for="newsletter-consent">
+                                    I agree to receive communications from Global Rights Watch
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="footer-bottom py-3">
+        <div class="container">
+            <div class="row align-items-center">
+                <div class="col-md-6">
+                    <p class="mb-0">&copy; 2024 Global Rights Watch. All rights reserved.</p>
+                </div>
+                <div class="col-md-6 text-md-end">
+                    <a href="#">Privacy Policy</a>
+                    <a href="#">Terms of Use</a>
+                    <a href="#">Cookie Policy</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</footer>
+
+<style>
+/* Get Involved Section Styles */
+.involvement-card {
+    padding: 2rem;
+    border-radius: 15px;
+    height: 100%;
+    transition: transform 0.3s ease;
+}
+
+.involvement-card:hover {
+    transform: translateY(-5px);
+}
+
+.primary-card {
+    background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+    color: white;
+}
+
+.secondary-card {
+    background: white;
+    box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+}
+
+.donation-tiers {
+    display: flex;
+    gap: 1rem;
+    flex-wrap: wrap;
+    margin: 1.5rem 0;
+}
+
+.tier-btn {
+    padding: 0.5rem 1.5rem;
+    border: 2px solid white;
+    border-radius: 25px;
+    background: transparent;
+    color: white;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.tier-btn.active {
+    background: white;
+    color: var(--primary-color);
+}
+
+.custom-amount {
+    padding: 0.5rem 1rem;
+    border: 2px solid white;
+    border-radius: 25px;
+    background: transparent;
+    color: white;
+    width: 150px;
+}
+
+.network-options {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1rem;
+    margin: 2rem 0;
+}
+
+.option {
+    text-align: center;
+}
+
+.option i {
+    font-size: 2rem;
+    color: var(--primary-color);
+    margin-bottom: 1rem;
+}
+
+/* Impact Calculator Styles */
+.impact-calculator {
+    background: white;
+    padding: 2rem;
+    border-radius: 15px;
+    box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+}
+
+.impact-range {
+    width: 100%;
+    margin: 1rem 0;
+}
+
+.range-values {
+    display: flex;
+    justify-content: space-between;
+    color: #666;
+}
+
+.impact-results {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1rem;
+    text-align: center;
+}
+
+.result-item {
+    padding: 1rem;
+}
+
+.result-number {
+    display: block;
+    font-size: 2rem;
+    font-weight: bold;
+    color: var(--primary-color);
+}
+
+/* Footer Styles */
+.footer-section {
+    background: var(--secondary-color);
+    color: white;
+}
+
+.footer-top {
+    background: rgba(0,0,0,0.1);
+}
+
+.social-links {
+    margin-top: 1.5rem;
+}
+
+.social-links a {
+    display: inline-block;
+    width: 35px;
+    height: 35px;
+    background: rgba(255,255,255,0.1);
+    border-radius: 50%;
+    text-align: center;
+    line-height: 35px;
+    color: white;
+    margin-right: 0.5rem;
+    transition: all 0.3s ease;
+}
+
+.social-links a:hover {
+    background: var(--primary-color);
+    transform: translateY(-3px);
+}
+
+.footer-links {
+    list-style: none;
+    padding: 0;
+}
+
+.footer-links li {
+    margin-bottom: 0.8rem;
+}
+
+.footer-links a {
+    color: rgba(255,255,255,0.8);
+    text-decoration: none;
+    transition: all 0.3s ease;
+}
+
+.footer-links a:hover {
+    color: white;
+    padding-left: 5px;
+}
+
+.footer-bottom {
+    background: rgba(0,0,0,0.2);
+}
+
+.footer-bottom a {
+    color: white;
+    text-decoration: none;
+    margin-left: 1.5rem;
+}
+</style>
+
+<script>
+// Donation Tiers
+document.querySelectorAll('.tier-btn').forEach(btn => {
+    btn.addEventListener('click', () => {
+        document.querySelectorAll('.tier-btn').forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+    });
+});
+
+// Impact Calculator
+const impactRange = document.querySelector('.impact-range');
+const resultNumbers = document.querySelectorAll('.result-number');
+
+impactRange.addEventListener('input', (e) => {
+    const value = e.target.value;
+    const multiplier = value / 25;
+    
+    resultNumbers[0].textContent = Math.round(25 * multiplier);
+    resultNumbers[1].textContent = Math.round(10 * multiplier);
+    resultNumbers[2].textContent = Math.round(5 * multiplier);
+});
+
+// Scroll Animation
+function revealOnScroll() {
+    const elements = document.querySelectorAll('.story-card, .action-card, .research-card');
+    
+    elements.forEach(element => {
+        const elementTop = element.getBoundingClientRect().top;
+        const windowHeight = window.innerHeight;
+        
+        if (elementTop < windowHeight - 100) {
+            element.classList.add('revealed');
+        }
+    });
+}
+
+window.addEventListener('scroll', revealOnScroll);
+
+// Newsletter Form
+document.querySelector('.newsletter-form').addEventListener('submit', (e) => {
+    e.preventDefault();
+    const email = e.target.querySelector('input[type="email"]').value;
+    const consent = document.querySelector('#newsletter-consent').checked;
+    
+    if (!email || !consent) {
+        alert('Please fill in your email and confirm your consent.');
+        return;
+    }
+    
+    // Here you would typically send this to your backend
+    alert('Thank you for subscribing!');
+    e.target.reset();
+});
+
+// Sticky Navigation
+const navbar = document.querySelector('.navbar');
+let lastScroll = 0;
+
+window.addEventListener('scroll', () => {
+    const currentScroll = window.pageYOffset;
+    
+    if (currentScroll > lastScroll && currentScroll > 100) {
+        navbar.classList.add('navbar-hidden');
+    } else {
+        navbar.classList.remove('navbar-hidden');
+    }
+    
+    lastScroll = currentScroll;
+});
+
+// Progress Ring Animation
+function animateProgressRings() {
+    document.querySelectorAll('.progress-ring').forEach(ring => {
+        const percentage = ring.querySelector('.progress-number').textContent;
+        ring.style.background = `conic-gradient(
+            var(--primary-color) ${percentage},
+            #eee ${percentage} 100%
+        )`;
+    });
+}
+
+animateProgressRings();
+
+// Dark Overlay Animation
+document.addEventListener('DOMContentLoaded', () => {
+    const overlay = document.querySelector('.freedom-overlay');
+    const continueBtn = document.querySelector('.continue-btn');
+
+    continueBtn.addEventListener('click', () => {
+        overlay.style.opacity = '0';
+        setTimeout(() => {
+            overlay.style.display = 'none';
+        }, 2000);
+    });
+});
+
+// Initialize World Map
+// Note: You'll need to include a mapping library like jVectorMap or Leaflet
+// This is a placeholder for the map initialization
+function initializeMap() {
+    // Map initialization code here
+}
+
+// Animate story cards on scroll
+const observerOptions = {
+    threshold: 0.2
+};
+
+const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+        if (entry.isIntersecting) {
+            entry.target.style.opacity = '1';
+            entry.target.style.transform = 'translateY(0)';
+        }
+    });
+}, observerOptions);
+
+document.querySelectorAll('.animated-card').forEach(card => {
+    observer.observe(card);
+});
+</script>
+</body>
+</html>
