@@ -1,0 +1,40 @@
+body{
+    /* background-color:darkslategrey;
+    opacity: 0.9; */
+    background-image: url(https://images.pexels.com/photos/259915/pexels-photo-259915.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2);
+    background-repeat: no-repeat;
+    background-attachment: fixed; /* background scroll(hareket etmez) etmez */
+    background: url(https://images.pexels.com/photos/259915/pexels-photo-259915.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2) no-repeat center center fixed;
+
+}
+
+
+h1{
+    color: red;
+    font-size: 50px;
+    border: solid 1px black;
+    padding: 20px; /* içten boşluk */
+    margin: 20px ; /* dıştan boşluk */
+    margin-top: 20px;
+    outline-color: green;
+}
+h1,h2,h3 {
+    padding: 20px;
+}
+
+#redText{
+    color: green;
+}
+.redText{
+    color: blue;
+}
+p.center{
+    text-align: center;
+}
+*{
+    margin: 0; 
+    padding: 0;
+}
+/*
+Yorum satırı
+*/
